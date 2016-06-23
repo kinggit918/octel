@@ -6,12 +6,19 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gun99")
 INCLUDE_DIRECTORIES(
         deps/raft/
         deps/libuv/include/
+        deps/leveldb/include/
 )
+
 find_package (Threads)
 
-set(SOURCE_FILES src/main.c deps/libuv/.libs/libuv.a)
-add_executable(octel ${SOURCE_FILES})
+set(SOURCE_FILES_UV src/main.c deps/libuv/.libs/libuv.a)
+
+set(SOURCE_FILES_DB src/leveldb.c  deps/leveldb/out-static/libleveldb.a)
+
+add_executable(uv ${SOURCE_FILES_UV})
 
 
-target_link_libraries(octel  ${CMAKE_THREAD_LIBS_INIT})
+add_executable(leveldb ${SOURCE_FILES_DB})
+
+target_link_libraries(uv  ${CMAKE_THREAD_LIBS_INIT})
 

@@ -2,4 +2,5 @@
 *.gcno
 *~
 deps/libuv/*.*
+deps/leveldb/*.*
 .idea/*.*

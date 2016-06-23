@@ -1,14 +1,20 @@
 
-CFLAGS += -I./deps/libuv/include -pthread -g -O2 -fPIC
+CFLAGSUV += -I./deps/libuv/include  -pthread -g -O2
+CFLAGSDB +=  -I./deps/leveldb/include  -lstdc++ -pthread -lrt -lm  -ldl  -g -O2
 
 
-OBJECTS = ./src/main.c ./deps/libuv/.libs/libuv.a
+OBJECTSUV = ./src/main.c ./deps/libuv/.libs/libuv.a
+OBJECTSDB = ./src/leveldb.c deps/leveldb/out-static/libleveldb.a
 
-all: octel
+all: db uv
 
-.PHONY: octel
-octel: $(OBJECTS)
-	$(CC) $(OBJECTS) $(CFLAGS) -fPIC  -o octel
+.PHONY: db
+db: $(OBJECTSDB)
+	$(CC) $(OBJECTSDB) $(CFLAGSDB) -fPIC  -o leveldb
+
+.PHONY: uv
+uv: $(OBJECTSUV)
+	$(CC) $(OBJECTSUV) $(CFLAGSUV) -fPIC  -o uv
 
 clean:
 	rm -f ./octel
