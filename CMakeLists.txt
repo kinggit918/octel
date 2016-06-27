@@ -11,14 +11,18 @@ INCLUDE_DIRECTORIES(
 
 find_package (Threads)
 
-set(SOURCE_FILES_UV src/main.c deps/libuv/.libs/libuv.a)
+set(SOURCE_FILES_UV src/octel.c deps/libuv/.libs/libuv.a )
+set(SOURCE_FILES_process test/process.c deps/libuv/.libs/libuv.a)
 
-set(SOURCE_FILES_DB src/leveldb.c  deps/leveldb/out-static/libleveldb.a)
+set(SOURCE_FILES_DB src/leveldb.c  deps/leveldb/out-static/libleveldb.a )
 
-add_executable(uv ${SOURCE_FILES_UV})
-
+add_executable(uv ${SOURCE_FILES_UV} )
 
 add_executable(leveldb ${SOURCE_FILES_DB})
+add_executable(process ${SOURCE_FILES_process} )
 
 target_link_libraries(uv  ${CMAKE_THREAD_LIBS_INIT})
+
+
+
 
