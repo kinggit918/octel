@@ -1,9 +1,9 @@
 
-CFLAGSUV += -I./deps/libuv/include  -pthread -g -O2
+CFLAGSUV += -I./deps/libuv/include -I./src/  -pthread -g -O2
 CFLAGSDB +=  -I./deps/leveldb/include  -lstdc++ -pthread -lrt -lm  -ldl  -g -O2
 
 
-OBJECTSUV = ./src/octel.c ./deps/libuv/.libs/libuv.a
+OBJECTSUV = ./src/octel.c ./src/protocol.c ./deps/libuv/.libs/libuv.a
 OBJECTSDB = ./src/leveldb.c deps/leveldb/out-static/libleveldb.a
 
 all: db uv

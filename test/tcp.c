@@ -25,13 +25,6 @@ void alloc_buffer(uv_handle_t *handle,size_t sug_size,uv_buf_t *buf)
     buf->len = sug_size;
 }
 
-void on_write(uv_write_t * req,int status)
-{
-    if (status)
-        fprintf(stderr,"Write error %s\n",uv_strerror(status));
-    free(req);
-}
-
 void on_read(uv_stream_t *client,ssize_t nread,const uv_buf_t *buf)
 {
 
@@ -77,6 +70,8 @@ int main()
     uv_tcp_t server;
 
     uv_tcp_init(loop,&server);
+
+
     uv_ip4_addr("0.0.0.0",7001,&addr);
 
     uv_tcp_bind(&server,(const struct sockaddr*)&addr,0);
